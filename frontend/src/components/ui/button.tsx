@@ -11,6 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:   "bg-ink text-bone hover:bg-oxblood px-6 py-3.5",
+        secondary: "bg-bone text-ink border border-ink/30 hover:border-ink hover:bg-bone-2 px-6 py-3.5",
         outline:   "border border-ink text-ink hover:bg-ink hover:text-bone px-6 py-3.5",
         ghost:     "text-ink hover:text-oxblood px-3 py-2",
         oxblood:   "bg-oxblood text-bone hover:bg-oxblood-2 px-6 py-3.5",

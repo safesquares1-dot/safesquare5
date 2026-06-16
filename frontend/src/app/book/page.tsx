@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Calendar, Check, ChevronLeft, ChevronRight, Clock, CreditCard, Loader2, ArrowUpRight, User, MapPin } from "lucide-react";
@@ -34,6 +35,14 @@ const hours = (start: string, end: string) => {
 };
 
 export default function BookPage() {
+  return (
+    <Suspense fallback={null}>
+      <BookPageInner />
+    </Suspense>
+  );
+}
+
+function BookPageInner() {
   const params = useSearchParams();
   const router = useRouter();
   const initialRoom = params.get("room") ?? "";
@@ -93,9 +102,9 @@ export default function BookPage() {
             <li key={s.n} className="flex items-center gap-3">
               <span className={cn(
                 "font-mono text-[10px] uppercase tracking-[0.22em] px-3 py-2 border",
-                step === s.n ? "bg-ink text-bone border-ink" :
-                step > s.n   ? "border-ink/40 text-ink/60" :
-                               "border-ink/15 text-ink/40"
+                step === i ? "bg-ink text-bone border-ink" :
+                step > i   ? "border-ink/40 text-ink/60" :
+                             "border-ink/15 text-ink/40"
               )}>
                 {s.n} · {s.label}
               </span>

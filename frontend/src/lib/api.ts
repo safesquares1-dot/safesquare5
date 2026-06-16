@@ -3,6 +3,7 @@
  * Falls back to local mock data when the API is unreachable (useful for early dev / previews).
  */
 import { mockApi } from "./mock";
+import type { Room, Blog, Booking, User } from "./types";
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
@@ -43,32 +44,32 @@ export class ApiError extends Error {
 
 export const api = {
   // Auth
-  register: (data: any) => request("/auth/register", { method: "POST", body: JSON.stringify(data), mock: () => mockApi.register(data) }),
-  login: (data: any) => request("/auth/login", { method: "POST", body: JSON.stringify(data), mock: () => mockApi.login(data) }),
-  me: (token: string) => request("/auth/me", { token, mock: () => mockApi.me() }),
+  register: (data: any) => request<User>("/auth/register", { method: "POST", body: JSON.stringify(data), mock: () => mockApi.register(data) }),
+  login: (data: any) => request<User>("/auth/login", { method: "POST", body: JSON.stringify(data), mock: () => mockApi.login(data) }),
+  me: (token: string) => request<User>("/auth/me", { token, mock: () => mockApi.me() }),
 
   // Rooms
   listRooms: (params: Record<string, string | number | undefined> = {}) => {
     const q = new URLSearchParams(Object.entries(params).filter(([,v]) => v != null) as [string,string][]).toString();
-    return request(`/rooms${q ? `?${q}` : ""}`, { revalidate: 60, mock: () => mockApi.listRooms(params) });
+    return request<Room[]>(`/rooms${q ? `?${q}` : ""}`, { revalidate: 60, mock: () => mockApi.listRooms(params) });
   },
-  getRoom: (id: string) => request(`/rooms/${id}`, { revalidate: 60, mock: () => mockApi.getRoom(id) }),
+  getRoom: (id: string) => request<Room | null>(`/rooms/${id}`, { revalidate: 60, mock: () => mockApi.getRoom(id) }),
 
   // Bookings
-  createBooking: (data: any, token: string) => request("/bookings", { method: "POST", body: JSON.stringify(data), token, mock: () => mockApi.createBooking(data) }),
-  myBookings: (token: string) => request("/bookings/me", { token, mock: () => mockApi.myBookings() }),
-  cancelBooking: (id: string, token: string) => request(`/bookings/${id}`, { method: "DELETE", token, mock: () => mockApi.cancelBooking(id) }),
+  createBooking: (data: any, token: string) => request<Booking>("/bookings", { method: "POST", body: JSON.stringify(data), token, mock: () => mockApi.createBooking(data) }),
+  myBookings: (token: string) => request<Booking[]>("/bookings/me", { token, mock: () => mockApi.myBookings() }),
+  cancelBooking: (id: string, token: string) => request<{ id: string }>(`/bookings/${id}`, { method: "DELETE", token, mock: () => mockApi.cancelBooking(id) }),
 
   // Blog
   listBlogs: (params: { category?: string; q?: string } = {}) => {
     const q = new URLSearchParams(Object.entries(params).filter(([,v]) => v) as [string,string][]).toString();
-    return request(`/blogs${q ? `?${q}` : ""}`, { revalidate: 60, mock: () => mockApi.listBlogs(params) });
+    return request<Blog[]>(`/blogs${q ? `?${q}` : ""}`, { revalidate: 60, mock: () => mockApi.listBlogs(params) });
   },
-  getBlog: (slug: string) => request(`/blogs/${slug}`, { revalidate: 60, mock: () => mockApi.getBlog(slug) }),
+  getBlog: (slug: string) => request<Blog | null>(`/blogs/${slug}`, { revalidate: 60, mock: () => mockApi.getBlog(slug) }),
 
   // Contact
-  submitContact: (data: any) => request("/contact", { method: "POST", body: JSON.stringify(data), mock: () => mockApi.submitContact(data) }),
+  submitContact: (data: any) => request<{ ok: true }>("/contact", { method: "POST", body: JSON.stringify(data), mock: () => mockApi.submitContact(data) }),
 
   // Practitioner
-  upsertMyPractitioner: (data: any, token: string) => request("/practitioners/me", { method: "POST", body: JSON.stringify(data), token, mock: () => mockApi.upsertPractitioner(data) }),
+  upsertMyPractitioner: (data: any, token: string) => request<any>("/practitioners/me", { method: "POST", body: JSON.stringify(data), token, mock: () => mockApi.upsertPractitioner(data) }),
 };

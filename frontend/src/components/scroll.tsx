@@ -188,10 +188,12 @@ export function CountUp({
 export function SectionReveal({
   children,
   className,
+  id,
   delay = 0,
 }: {
   children: React.ReactNode;
   className?: string;
+  id?: string;
   delay?: number;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -207,7 +209,7 @@ export function SectionReveal({
       scrollTrigger: { trigger: el, start: "top 88%", once: true },
     });
   }, [delay]);
-  return <div ref={ref} className={className}>{children}</div>;
+  return <div ref={ref} id={id} className={className}>{children}</div>;
 }
 
 /* =====================================================================
