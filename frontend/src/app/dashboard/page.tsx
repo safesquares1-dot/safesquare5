@@ -6,13 +6,13 @@ import { Calendar, Clock, CreditCard, MapPin, TrendingUp, User, LogOut, Edit3, B
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { PageTransition, Reveal } from "@/components/editorial";
+import { PageTransition } from "@/components/motion";
 import { Stat } from "@/components/stat";
 import { useAuth } from "@/contexts/auth";
 import { api } from "@/lib/api";
 import { formatCurrency } from "@/lib/utils";
 import { RoleGuard } from "@/components/role-guard";
-import { NumberMark, ColumnRule, Hairline } from "@/components/editorial";
+import { NumberMark, Reveal, Hairline } from "@/components/editorial";
 import { ArrowUpRight } from "lucide-react";
 import { DashboardBackdrop } from "@/components/effects/dashboard-backdrop";
 

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { PageTransition } from "@/components/motion";
 import { Reveal, NumberMark, Hairline } from "@/components/editorial";
+import { Stat } from "@/components/stat";
 import { RoleGuard } from "@/components/role-guard";
 import { useAuth } from "@/contexts/auth";
 import { formatCurrency } from "@/lib/utils";
