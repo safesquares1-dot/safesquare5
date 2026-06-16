@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /F /PID 10900)",
+      "Bash(cmd //c \"taskkill /F /PID 10900\")",
+      "Bash(curl -sS -o /dev/null -w \"HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -sS -o /dev/null -w \"HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/rooms)",
+      "Bash(curl -sS -o /dev/null -w \"HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/about)",
+      "Bash(curl -sS -o /dev/null -w \"/        HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -sS -o /dev/null -w \"/about   HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/about)",
+      "Bash(curl -sS -o /dev/null -w \"/rooms   HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/rooms)",
+      "Bash(curl -sS -o /dev/null -w \"/blog    HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/blog)",
+      "Bash(curl -sS -o /dev/null -w \"/login   HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/login)",
+      "Bash(cmd //c \"taskkill /F /PID 8184\")",
+      "Bash(curl -sS -o /dev/null -w \"/book    HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/book)",
+      "Bash(curl -sS -o /dev/null -w \"/dashboard HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/dashboard)",
+      "Bash(xargs -I{} sed -i 's|import { \\\\\\(.*\\\\\\)Reveal\\\\\\(.*\\\\\\) } from \"@/components/motion\";|import { \\\\1Reveal\\\\2 } from \"@/components/editorial\";|g' {})",
+      "Bash(xargs -I{} sed -i 's|import { Reveal } from \"@/components/motion\";|import { Reveal } from \"@/components/editorial\";|g' {})",
+      "WebFetch(domain:mimo.xiaomi.com)",
+      "WebSearch",
+      "Bash(curl *)",
+      "WebFetch(domain:www.tresmarescapital.com)",
+      "Bash(grep -oE \"Component for [^\\\\\\\\\\\\\"]+|Element type is invalid\")",
+      "Bash(grep -oE \"TypeError[^\\\\\\\\\\\\\"]+|not a function[^\\\\\\\\\\\\\"]+|is not a function[^\\\\\\\\\\\\\"]+\")",
+      "Bash(cmd //c \"taskkill /F /PID 8772\")",
+      "Bash(cmd //c \"taskkill /F /PID 9492\")",
+      "Bash(dir F:\\\\1\\\\sfsq)",
+      "Bash(Select-Object -First 5)",
+      "Bash(git --version)",
+      "Bash(command -v gh)",
+      "Bash(command -v vercel)",
+      "Bash(command -v node)",
+      "Bash(command -v npm)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

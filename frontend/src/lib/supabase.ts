@@ -1,0 +1,28 @@
+/**
+ * Supabase client for the browser. Lazy: returns null when env vars are missing,
+ * so the app stays runnable in mock mode. Always check via isSupabaseConfigured().
+ */
+"use client";
+
+import { createBrowserClient } from "@supabase/ssr";
+import type { SupabaseClient } from "@supabase/supabase-js";
+
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+let _client: SupabaseClient | null = null;
+
+export function getSupabase(): SupabaseClient | null {
+  if (!url || !key) return null;
+  if (!_client) _client = createBrowserClient(url, key);
+  return _client;
+}
+
+/**
+ * Always returns a boolean. Safe to call on both server and client.
+ * On the server, reads from process.env directly; on the client, NEXT_PUBLIC_* is inlined.
+ */
+export function isSupabaseConfigured(): boolean {
+  return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+}
+
